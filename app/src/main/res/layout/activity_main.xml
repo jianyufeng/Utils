@@ -9,14 +9,16 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     tools:context="com.fule.mesurekeyheight.MainActivity">
+    <EditText android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:hint="fsdfdssdfsfs"/>
+    <ListView android:layout_width="match_parent"
+              android:id="@+id/lv"
+        android:entries="@array/create_group_type_code"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
-        <ListView android:layout_width="match_parent"
-                  android:entries="@array/create_group_type_code"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1">
-
-        </ListView>
-
+</ListView>
 
 
     <EditText

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.fule.mesurekeyheight.util.ScreenUtil;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private View p;
     private EditText ed;
+    private ListView lv ;
     private static final String TAG = "MainActivity";
     private int keyH = 0;
     public interface OnSoftKeyboardStateChangedListener {
@@ -77,15 +79,16 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mLayoutChangeListener);
         p=findViewById(R.id.contain_id);
         ed= (EditText) findViewById(R.id.edit);
+        lv= (ListView) findViewById(R.id.lv);
         ed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-//                if (hasFocus){
-//                    p.scrollBy(0,20);
+                if (hasFocus){
+                lv.smoothScrollToPosition(lv.getAdapter().getCount());
 //
-//                }else {
+                }else {
 //                    p.scrollBy(0,-keyH);
-//                }
+                }
             }
         });
     }
