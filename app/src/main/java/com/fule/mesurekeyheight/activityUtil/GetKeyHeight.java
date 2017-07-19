@@ -1,4 +1,4 @@
-package com.fule.mesurekeyheight;
+package com.fule.mesurekeyheight.activityUtil;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
@@ -6,19 +6,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.EditText;
 
+import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.util.ScreenUtil;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-    private View p;
-    private EditText ed;
+public class GetKeyHeight extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private int keyH = 0;
+
     public interface OnSoftKeyboardStateChangedListener {
         public void OnSoftKeyboardStateChanged(boolean isKeyBoardShow, int keyboardHeight);
     }
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 //如果屏幕高度和Window可见区域高度差值大于整个屏幕高度的1/3，则表示软键盘显示中，否则软键盘为隐藏状态。
                 int heightDifference = ScreenUtil.getScreenHeight(getApplicationContext()) - (r.bottom - r.top);
 
-                Log.d(TAG, "onGlobalLayout: " + heightDifference);
+                Log.d(TAG, "onGlobalLayout: "+heightDifference);
                 boolean isKeyboardShowing = heightDifference > ScreenUtil.getScreenHeight(getApplicationContext()) / 3;
 
                 //如果之前软键盘状态为显示，现在为关闭，或者之前为关闭，现在为显示，则表示软键盘的状态发生了改变
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     mIsSoftKeyboardShowing = isKeyboardShowing;
                     if (isKeyboardShowing){
                         //键盘高度
-                        keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext());
+                        int keyHeight = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext());
                     }
                     for (int i = 0; i < mKeyboardStateListeners.size(); i++) {
                         OnSoftKeyboardStateChangedListener listener = mKeyboardStateListeners.get(i);
@@ -75,19 +72,7 @@ public class MainActivity extends AppCompatActivity {
         };
         //注册布局变化监听
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mLayoutChangeListener);
-        p=findViewById(R.id.contain_id);
-        ed= (EditText) findViewById(R.id.edit);
-        ed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-//                if (hasFocus){
-//                    p.scrollBy(0,20);
-//
-//                }else {
-//                    p.scrollBy(0,-keyH);
-//                }
-            }
-        });
+
     }
 
     @SuppressWarnings("deprecation")
