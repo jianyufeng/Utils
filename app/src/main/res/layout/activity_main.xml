@@ -1,33 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:id="@+id/contain_id"
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.fule.mesurekeyheight.MainActivity">
-    <EditText android:layout_width="match_parent"
-              android:layout_height="50dp"
-              android:hint="fsdfdssdfsfs"/>
-    <ListView android:layout_width="match_parent"
-              android:id="@+id/lv"
-        android:entries="@array/create_group_type_code"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+    android:orientation="vertical">
 
-</ListView>
+    <ListView android:id="@+id/lv"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:entries="@array/create_group_type_code">
 
+    </ListView>
 
-    <EditText
-        android:id="@+id/edit"
-        android:layout_width="match_parent" android:layout_height="50dp"
-              android:layout_alignParentBottom="true"
-              android:hint="sdssdfsfs "/>
-    <!--<Button android:layout_width="match_parent" android:layout_height="50dp"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:text="顶"/> -->
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="50dp"
+                  android:orientation="horizontal">
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:hint="sdssdfsfs "/>
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content" android:layout_height="50dp"
+            android:text="笑脸"/>
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content" android:layout_height="50dp"
+            android:text="发送"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/small"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#f00"
+        android:orientation="vertical">
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/small_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="笑脸"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/send_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="++++"/>
+    </LinearLayout>
+
 
 </LinearLayout>

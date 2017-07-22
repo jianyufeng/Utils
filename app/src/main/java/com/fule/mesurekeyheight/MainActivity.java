@@ -4,23 +4,46 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.fule.mesurekeyheight.util.KeyBordUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
 
 import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
     private View p;
     private EditText ed;
     private ListView lv ;
     private static final String TAG = "MainActivity";
     private int keyH = 0;
+    private Button btn;
+    private Button send;
+    private LinearLayout small;
+    private TextView small_show;
+    private TextView send_show;
+
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            setHeight(small,keyH);
+            small_show.setVisibility(View.VISIBLE);
+            super.handleMessage(msg);
+        }
+    };
     public interface OnSoftKeyboardStateChangedListener {
         public void OnSoftKeyboardStateChanged(boolean isKeyBoardShow, int keyboardHeight);
     }
@@ -80,19 +103,73 @@ public class MainActivity extends AppCompatActivity {
         p=findViewById(R.id.contain_id);
         ed= (EditText) findViewById(R.id.edit);
         lv= (ListView) findViewById(R.id.lv);
-        ed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        btn= (Button) findViewById(R.id.btn);
+        send= (Button) findViewById(R.id.send);
+        small= (LinearLayout) findViewById(R.id.small);
+        small_show= (TextView) findViewById(R.id.small_show);
+        send_show= (TextView) findViewById(R.id.send_show);
+
+
+        lv.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
+            public boolean onTouch(View v, MotionEvent event) {
+                KeyBordUtil.hideKeybroad(MainActivity.this);
+//                setHeight(small,0);
+                return false;
+            }
+        });
+
+        //根据输入框的聚焦状体  决定软键盘的显示和隐藏
+
+
+        ed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 lv.smoothScrollToPosition(lv.getAdapter().getCount());
-//
+                ed.setFocusable(true);
+                ed.setFocusableInTouchMode(true);
+                ed.requestFocus();
+            }
+        });
+//        ed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus){
+//                    KeyBordUtil.toggleKeyBroad(MainActivity.this);
+//                }else {
+//                    KeyBordUtil.hideKeybroad(MainActivity.this);
+//                }
+//            }
+//        });
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lv.smoothScrollToPosition(lv.getAdapter().getCount());
+                if (small_show.getVisibility() == View.GONE){
+                    KeyBordUtil.hideKeybroad(MainActivity.this);
+                    handler.sendEmptyMessageDelayed(0,400);
+
                 }else {
-//                    p.scrollBy(0,-keyH);
+                    KeyBordUtil.toggleKeyBroad(MainActivity.this);
                 }
+
+            }
+        });
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lv.smoothScrollToPosition(lv.getAdapter().getCount());
+//                ed.setFocusable(false);
+                KeyBordUtil.toggleKeyBroad(MainActivity.this);
             }
         });
     }
-
+    private void setHeight(View v ,int px){
+        ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
+        layoutParams.height = px;
+        v.setLayoutParams(layoutParams);
+    }
+  private boolean isShow = false;
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
     @Override
