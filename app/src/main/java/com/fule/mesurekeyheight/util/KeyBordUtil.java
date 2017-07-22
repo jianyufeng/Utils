@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 public class KeyBordUtil {
 
 
-
     /**
      * 强制隐藏输入法键盘
      */
@@ -27,6 +26,7 @@ public class KeyBordUtil {
             }
         }
     }
+
     //此方法，如果显示则隐藏，如果隐藏则显示
     public static void toggleKeyBroad(Context c) {
         InputMethodManager imm = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -39,12 +39,18 @@ public class KeyBordUtil {
         }
     }
 
-    public static boolean keyBoardShow(Context c, View v){
+    public static boolean keyBoardShow(Context c, View v) {
         InputMethodManager imm = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
         // 得到InputMethodManager的实例
-        if (imm.isActive(v)) {
+
+        if (imm.hideSoftInputFromWindow(v.getWindowToken(), 0)) {
+            imm.showSoftInput(v, 0);
+        //软键盘已弹出
             return true;
+        } else {
+            return false;
+            //软键盘未弹出
         }
-        return false;
+
     }
 }

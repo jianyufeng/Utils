@@ -144,14 +144,15 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lv.smoothScrollToPosition(lv.getAdapter().getCount());
-                if (small_show.getVisibility() == View.GONE){
-                    KeyBordUtil.hideKeybroad(MainActivity.this);
-                    handler.sendEmptyMessageDelayed(0,400);
 
-                }else {
-                    KeyBordUtil.toggleKeyBroad(MainActivity.this);
-                }
+                Log.d(TAG, "onClick: "+   KeyBordUtil.keyBoardShow(MainActivity.this,ed));
+//                if (small_show.getVisibility() == View.GONE){
+//                    KeyBordUtil.hideKeybroad(MainActivity.this);
+//                    handler.sendEmptyMessageDelayed(0,400);
+
+//                }else {
+//                    KeyBordUtil.toggleKeyBroad(MainActivity.this);
+//                }
 
             }
         });
