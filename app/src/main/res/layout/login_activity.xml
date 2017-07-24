@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/login_p"
+              android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView_id"
+        android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+            <ImageView android:layout_width="150dp"
+                       android:layout_height="150dp"
+                       android:layout_gravity="center_horizontal"
+                       android:layout_marginTop="50dp"
+                       android:background="#f00"/>
+
+
+            <EditText android:layout_width="match_parent"
+                      android:id="@+id/account"
+                      android:layout_height="50dp"
+                      android:layout_marginTop="20dp"
+                      android:text="fdfsfsd"/>
+            <Button android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#e20f7c"
+                    android:text="登录"
+                    android:id="@+id/login_id"
+                    android:textColor="#fff"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

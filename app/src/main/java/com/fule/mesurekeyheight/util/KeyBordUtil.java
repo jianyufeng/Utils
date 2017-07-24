@@ -42,7 +42,6 @@ public class KeyBordUtil {
     public static boolean keyBoardShow(Context c, View v) {
         InputMethodManager imm = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
         // 得到InputMethodManager的实例
-
         if (imm.hideSoftInputFromWindow(v.getWindowToken(), 0)) {
             imm.showSoftInput(v, 0);
         //软键盘已弹出
