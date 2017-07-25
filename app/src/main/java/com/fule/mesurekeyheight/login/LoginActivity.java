@@ -6,11 +6,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ReplacementTransformationMethod;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fule.mesurekeyheight.R;
@@ -26,7 +29,7 @@ import com.fule.mesurekeyheight.util.ScreenUtil;
  * 登录界面获取软键盘的高度 存储到配置文件中
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
 
     private static final String TAG = "LoginActivity";
@@ -39,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private int keyHeight = 0; //键盘高度
 
+    private EditText account;
     private EditText pass;
 
     @Override
@@ -63,22 +67,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     mIsSoftKeyboardShowing = isKeyboardShowing;
                     //当前软键盘keyHeight显示 并且键盘高度为0  获取软键盘高度
                     if (isKeyboardShowing) {
-                        //键盘高度
-                        int keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext());
-
+                        //键盘高度  =  剩余高度   -  状态栏高度   -  虚拟按键的高度(不一定有  大部分 手机没有)
+                        int keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext()) -   ScreenUtil.getNavigationBarHeight(getApplicationContext());;
                         if (keyH > keyHeight) {
                             //存储最高的键盘高度
                             keyHeight = keyH;
                             //保存高度到配置文件中
                             SPUtil.put(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), keyH);
                             //滑动显示位置到底部
-                            scrollView.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //滑动到底部
-                                    scrollView.scrollTo(0, scrollView.getHeight());
-                                }
-                            }, 300);
+                            scrollBottom(scrollView);
                         }
                     }
                 }
@@ -94,33 +91,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //设置点击监听
         login.setOnClickListener(this);
 
-
+        account = (EditText) findViewById(R.id.account);
         pass = (EditText) findViewById(R.id.password);
+        pass.setOnEditorActionListener(this);
 
-        pass.setTransformationMethod(new ReplacementTransformationMethod() {
-            String strWord = null;
-            @Override
-            protected char[] getOriginal() {
-                //循环ASCII值 字符串形式累加到String
-                for (char i = 0; i < 256; i++) {
-                    strWord += String.valueOf(i);
-                }
-                //strWord转换为字符形式的数组
-                char[] charOriginal = strWord.toCharArray();
-                return charOriginal;
-            }
-
-            @Override
-            protected char[] getReplacement() {
-                char[] charReplacement = new char[255];
-                //输入的字符在ASCII范围内，将其转换为*
-                for (int i = 0; i < 255; i++) {
-                    charReplacement[i] = '*';
-                }
-
-                return charReplacement;
-            }
-        });
+        //替换密码默认显示形式
+        pass.setTransformationMethod(new PasswordReplace());
     }
 
     @SuppressWarnings("deprecation")
@@ -141,11 +117,72 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int id = v.getId();
         switch (id) {
             case R.id.login_id://登录点击事件
-                int h = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), 0);
-                Toast.makeText(getApplicationContext(), "H:" + h, Toast.LENGTH_SHORT).show();
-                //跳转到主界面
-//                startActivity(new Intent(this, MainActivity.class));
+                //登录的逻辑
+                login();
                 break;
         }
+    }
+
+    private void scrollBottom(final View v) {
+        v.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //滑动到底部
+                v.scrollTo(0, v.getHeight());
+            }
+        }, 300);
+    }
+
+    private void login(){
+        int h = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), 0);
+        Toast.makeText(getApplicationContext(), "H:" + h, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    //软件键盘 点击的事件回调
+    //处理确定按钮
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    /*隐藏软键盘*/
+            //处理登录逻辑
+            login();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 密码默认显示替换成  * 好
+     */
+
+
+    class PasswordReplace extends ReplacementTransformationMethod {
+
+        String strWord = null;
+
+        @Override
+        protected char[] getOriginal() {
+            //循环ASCII值 字符串形式累加到String
+            for (char i = 0; i < 256; i++) {
+                strWord += String.valueOf(i);
+            }
+            //strWord转换为字符形式的数组
+            char[] charOriginal = strWord.toCharArray();
+            return charOriginal;
+        }
+
+        @Override
+        protected char[] getReplacement() {
+            char[] charReplacement = new char[255];
+            //输入的字符在ASCII范围内，将其转换为*
+            for (int i = 0; i < 255; i++) {
+                charReplacement[i] = '*';
+            }
+
+            return charReplacement;
+        }
+
     }
 }

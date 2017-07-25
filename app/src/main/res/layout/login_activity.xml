@@ -24,7 +24,7 @@
                       android:layout_marginTop="20dp"
                       android:hint="账号"
                       android:imeOptions="actionNext"
-                      android:inputType="textCapCharacters"
+                      android:inputType="text"
                       android:singleLine="true"/>
             <EditText android:id="@+id/password"
                       android:layout_width="match_parent"
@@ -34,6 +34,7 @@
                       android:imeOptions="actionDone"
                       android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ"
                       android:password="true"
+                      android:textCursorDrawable="@drawable/cursor_shap"
                       android:singleLine="true"/>
             <Button android:id="@+id/login_id"
                     android:layout_width="match_parent"
