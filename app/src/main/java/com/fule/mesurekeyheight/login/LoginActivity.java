@@ -1,12 +1,11 @@
 package com.fule.mesurekeyheight.login;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.method.ReplacementTransformationMethod;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.fule.mesurekeyheight.MainActivity;
 import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
@@ -24,6 +22,8 @@ import com.fule.mesurekeyheight.util.ScreenUtil;
 /**
  * 作者:Created by 简玉锋 on 2017/7/24 16:36
  * 邮箱: jianyufeng@38.hn
+ * <p>
+ * 登录界面获取软键盘的高度 存储到配置文件中
  */
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,39 +34,52 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ViewTreeObserver.OnGlobalLayoutListener mLayoutChangeListener;
     private boolean mIsSoftKeyboardShowing;
 
-    private EditText account;
     private ScrollView scrollView;
     private Button login;
+
+    private int keyHeight = 0; //键盘高度
+
+    private EditText pass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //设置布局
         setContentView(R.layout.login_activity);
+        //创建监听  布局尺寸变换监听器
         mLayoutChangeListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            //布局变化时回调
             @Override
             public void onGlobalLayout() {
                 //判断窗口可见区域大小
                 Rect r = new Rect();
+                //获取当前可见视图的尺寸大小
                 getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
                 //如果屏幕高度和Window可见区域高度差值大于整个屏幕高度的1/3，则表示软键盘显示中，否则软键盘为隐藏状态。
                 int heightDifference = ScreenUtil.getScreenHeight(getApplicationContext()) - (r.bottom - r.top);
-
-                Log.d(TAG, "onGlobalLayout: " + heightDifference);
                 boolean isKeyboardShowing = heightDifference > ScreenUtil.getScreenHeight(getApplicationContext()) / 3;
                 //如果之前软键盘状态为显示，现在为关闭，或者之前为关闭，现在为显示，则表示软键盘的状态发生了改变
                 if ((mIsSoftKeyboardShowing && !isKeyboardShowing) || (!mIsSoftKeyboardShowing && isKeyboardShowing)) {
                     mIsSoftKeyboardShowing = isKeyboardShowing;
-                    if (isKeyboardShowing){
+                    //当前软键盘keyHeight显示 并且键盘高度为0  获取软键盘高度
+                    if (isKeyboardShowing) {
                         //键盘高度
-                        int  keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext());
-                        SPUtil.put(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(),keyH);
-                        scrollView.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //滑动到底部
-                                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                            }
-                        },500);
+                        int keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext());
 
+                        if (keyH > keyHeight) {
+                            //存储最高的键盘高度
+                            keyHeight = keyH;
+                            //保存高度到配置文件中
+                            SPUtil.put(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), keyH);
+                            //滑动显示位置到底部
+                            scrollView.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //滑动到底部
+                                    scrollView.scrollTo(0, scrollView.getHeight());
+                                }
+                            }, 300);
+                        }
                     }
                 }
 
@@ -74,10 +87,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
         //注册布局变化监听
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mLayoutChangeListener);
-    scrollView = (ScrollView) findViewById(R.id.scrollView_id);
-    login = (Button) findViewById(R.id.login_id);
+
+        //获取组件
+        scrollView = (ScrollView) findViewById(R.id.scrollView_id);
+        login = (Button) findViewById(R.id.login_id);
+        //设置点击监听
         login.setOnClickListener(this);
+
+
+        pass = (EditText) findViewById(R.id.password);
+
+        pass.setTransformationMethod(new ReplacementTransformationMethod() {
+            String strWord = null;
+            @Override
+            protected char[] getOriginal() {
+                //循环ASCII值 字符串形式累加到String
+                for (char i = 0; i < 256; i++) {
+                    strWord += String.valueOf(i);
+                }
+                //strWord转换为字符形式的数组
+                char[] charOriginal = strWord.toCharArray();
+                return charOriginal;
+            }
+
+            @Override
+            protected char[] getReplacement() {
+                char[] charReplacement = new char[255];
+                //输入的字符在ASCII范围内，将其转换为*
+                for (int i = 0; i < 255; i++) {
+                    charReplacement[i] = '*';
+                }
+
+                return charReplacement;
+            }
+        });
     }
+
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
     @Override
@@ -94,11 +139,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
-            case R.id.login_id:
-                int h = (int) SPUtil.get(getApplicationContext(),ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(),0);
-                Toast.makeText(getApplicationContext(),"H:"+h,Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MainActivity.class));
+        switch (id) {
+            case R.id.login_id://登录点击事件
+                int h = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), 0);
+                Toast.makeText(getApplicationContext(), "H:" + h, Toast.LENGTH_SHORT).show();
+                //跳转到主界面
+//                startActivity(new Intent(this, MainActivity.class));
                 break;
         }
     }
