@@ -78,7 +78,7 @@ public class ClearEditText extends EditText implements View.OnTouchListener, Vie
         setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1], mClearDrawable, getCompoundDrawables()[3]);
     }
     /**
-     *
+     * 隐藏删除图标
      */
     private void setClearDrawableNull() {
         setCompoundDrawables(getCompoundDrawables()[0], getCompoundDrawables()[1], null, getCompoundDrawables()[3]);
