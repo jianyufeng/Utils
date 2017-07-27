@@ -18,33 +18,50 @@
                        android:layout_gravity="center_horizontal"
                        android:layout_marginTop="50dp"
                        android:background="#f00"/>
-            <EditText android:id="@+id/account"
-                      android:layout_width="match_parent"
-                      android:layout_height="50dp"
-                      android:layout_marginTop="20dp"
-                      android:hint="账号"
-                      android:imeOptions="actionNext"
-                      android:inputType="text"
-                      android:singleLine="true"/>
+            <com.fule.mesurekeyheight.util.widget.ClearEditText
+                android:id="@+id/account"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+
+                android:drawableLeft="@mipmap/icon_user"
+                android:drawablePadding="10dp"
+                android:hint="账号"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                android:singleLine="true"/>
             <com.fule.mesurekeyheight.util.widget.ClearEditText
                 android:id="@+id/password"
-                android:background="#aaa"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ"
+                android:drawableLeft="@mipmap/icon_password"
+                android:drawablePadding="10dp"
+                android:hint="请输入密码"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textCursorDrawable="@drawable/cursor_shap"/>
+
+            <TextView android:id="@+id/login_id"
+                      style="@style/Widget.AppCompat.Button.Colored"
                       android:layout_width="match_parent"
                       android:layout_height="50dp"
-                      android:layout_marginTop="20dp"
-                      android:hint="密码"
-                      android:imeOptions="actionDone"
-                      android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ"
-                      android:password="true"
-                      android:textCursorDrawable="@drawable/cursor_shap"
-                      android:singleLine="true"/>
-            <Button android:id="@+id/login_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
-                    android:background="#e20f7c"
-                    android:text="登录"
-                    android:textColor="#fff"/>
+                      android:layout_marginLeft="10dp"
+                      android:layout_marginRight="10dp"
+                      android:layout_marginTop="30dp"
+                      android:text="登录"
+                      android:textColor="#fff"/>
         </LinearLayout>
     </ScrollView>
 
