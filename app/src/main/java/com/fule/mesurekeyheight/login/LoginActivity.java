@@ -18,6 +18,7 @@ import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
+import com.fule.mesurekeyheight.util.face.Emojicon;
 import com.fule.mesurekeyheight.util.widget.ClearEditText;
 
 
@@ -97,6 +98,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //替换密码默认显示形式
         pass.setTransformationMethod(new PasswordReplace());
+        Emojicon emojicon = Emojicon.fromCodePoint(0x1f60d);
+        int icon = emojicon.getIcon();
+        String emoji = emojicon.getEmoji();
+        emojicon.getValue();
+      account.setText(emoji);
+
 
     }
 
