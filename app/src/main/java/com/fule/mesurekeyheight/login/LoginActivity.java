@@ -10,8 +10,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +18,7 @@ import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
+import com.fule.mesurekeyheight.util.widget.ClearEditText;
 
 
 /**
@@ -35,15 +34,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "LoginActivity";
 
     private ViewTreeObserver.OnGlobalLayoutListener mLayoutChangeListener;
+    //记录软件盘当前的显示状态
     private boolean mIsSoftKeyboardShowing;
 
     private ScrollView scrollView;
-    private Button login;
+    private TextView login;
 
     private int keyHeight = 0; //键盘高度
 
-    private EditText account;
-    private EditText pass;
+    private ClearEditText account;
+    private ClearEditText pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,16 +87,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //获取组件
         scrollView = (ScrollView) findViewById(R.id.scrollView_id);
-        login = (Button) findViewById(R.id.login_id);
+        login = (TextView) findViewById(R.id.login_id);
         //设置点击监听
         login.setOnClickListener(this);
 
-        account = (EditText) findViewById(R.id.account);
-        pass = (EditText) findViewById(R.id.password);
+        account = (ClearEditText) findViewById(R.id.account);
+        pass = (ClearEditText) findViewById(R.id.password);
         pass.setOnEditorActionListener(this);
 
         //替换密码默认显示形式
         pass.setTransformationMethod(new PasswordReplace());
+
     }
 
     @SuppressWarnings("deprecation")
@@ -135,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void login(){
         int h = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), 0);
-        Toast.makeText(getApplicationContext(), "H:" + h, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "H:" + h+"  pass::"+ pass.getText().toString(), Toast.LENGTH_SHORT).show();
 
 
     }
@@ -148,6 +149,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     /*隐藏软键盘*/
             //处理登录逻辑
             login();
+
             return true;
         }
         return false;
