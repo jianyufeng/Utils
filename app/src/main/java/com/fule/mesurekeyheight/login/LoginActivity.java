@@ -18,8 +18,6 @@ import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
-import com.fule.mesurekeyheight.util.editTextEffect.EditTextAddImg;
-import com.fule.mesurekeyheight.util.editTextEffect.Str2Bitmap;
 import com.fule.mesurekeyheight.util.widget.ClearEditText;
 
 
@@ -100,8 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //替换密码默认显示形式
         pass.setTransformationMethod(new PasswordReplace());
 
-
-        EditTextAddImg.insertBitmap(pass,"123456", Str2Bitmap.createBitmap(this,"4567",16));
     }
 
     @SuppressWarnings("deprecation")
