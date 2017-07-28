@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
+import com.fule.mesurekeyheight.util.KeyBordUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
 import com.fule.mesurekeyheight.util.face.Emojicon;
 import com.fule.mesurekeyheight.util.widget.ClearEditText;
@@ -29,7 +30,7 @@ import com.fule.mesurekeyheight.util.widget.ClearEditText;
  * 登录界面获取软键盘的高度 存储到配置文件中
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener{
 
 
     private static final String TAG = "LoginActivity";
@@ -93,16 +94,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login.setOnClickListener(this);
 
         account = (ClearEditText) findViewById(R.id.account);
+
         pass = (ClearEditText) findViewById(R.id.password);
+        pass.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         pass.setOnEditorActionListener(this);
+
+
 
         //替换密码默认显示形式
         pass.setTransformationMethod(new PasswordReplace());
-        Emojicon emojicon = Emojicon.fromCodePoint(0x1f60d);
+        Emojicon emojicon = Emojicon.fromCodePoint(0x1f4a6);
         int icon = emojicon.getIcon();
         String emoji = emojicon.getEmoji();
         emojicon.getValue();
-      account.setText(emoji);
+         account.setText(emoji);
 
 
     }
@@ -136,31 +141,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void run() {
                 //滑动到底部
-                v.scrollTo(0, v.getHeight());
+                scrollView.scrollTo(0, scrollView.getHeight());
             }
         }, 300);
     }
 
     private void login(){
+        /*隐藏软键盘*/
+        KeyBordUtil.hideKeybroad(this);
         int h = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), 0);
         Toast.makeText(getApplicationContext(), "H:" + h+"  pass::"+ pass.getText().toString(), Toast.LENGTH_SHORT).show();
-
-
     }
 
     //软件键盘 点击的事件回调
     //处理确定按钮
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    /*隐藏软键盘*/
-            //处理登录逻辑
+        if (actionId == EditorInfo.IME_ACTION_DONE){
             login();
-
             return true;
         }
         return false;
     }
+
+
 
     /**
      * 密码默认显示替换成  * 好

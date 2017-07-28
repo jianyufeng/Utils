@@ -25,7 +25,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
-
                 android:drawableLeft="@mipmap/icon_user"
                 android:drawablePadding="10dp"
                 android:hint="账号"
