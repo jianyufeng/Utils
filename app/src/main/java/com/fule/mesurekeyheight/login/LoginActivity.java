@@ -19,8 +19,10 @@ import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
 import com.fule.mesurekeyheight.util.KeyBordUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
-import com.fule.mesurekeyheight.util.face.Emojicon;
+import com.fule.mesurekeyheight.util.face.EmojiUtil;
 import com.fule.mesurekeyheight.util.widget.ClearEditText;
+
+import java.io.IOException;
 
 
 /**
@@ -30,7 +32,7 @@ import com.fule.mesurekeyheight.util.widget.ClearEditText;
  * 登录界面获取软键盘的高度 存储到配置文件中
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
 
     private static final String TAG = "LoginActivity";
@@ -70,7 +72,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //当前软键盘keyHeight显示 并且键盘高度为0  获取软键盘高度
                     if (isKeyboardShowing) {
                         //键盘高度  =  剩余高度   -  状态栏高度   -  虚拟按键的高度(不一定有  大部分 手机没有)
-                        int keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext()) -   ScreenUtil.getNavigationBarHeight(getApplicationContext());;
+                        int keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext()) - ScreenUtil.getNavigationBarHeight(getApplicationContext());
+                        ;
                         if (keyH > keyHeight) {
                             //存储最高的键盘高度
                             keyHeight = keyH;
@@ -98,17 +101,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pass = (ClearEditText) findViewById(R.id.password);
         pass.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         pass.setOnEditorActionListener(this);
-
+        account.setText("989[爱你]123");
 
 
         //替换密码默认显示形式
         pass.setTransformationMethod(new PasswordReplace());
-        Emojicon emojicon = Emojicon.fromCodePoint(0x1f4a6);
-        int icon = emojicon.getIcon();
-        String emoji = emojicon.getEmoji();
-        emojicon.getValue();
-         account.setText(emoji);
-
 
     }
 
@@ -146,24 +143,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }, 300);
     }
 
-    private void login(){
+    private void login() {
         /*隐藏软键盘*/
         KeyBordUtil.hideKeybroad(this);
         int h = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), 0);
-        Toast.makeText(getApplicationContext(), "H:" + h+"  pass::"+ pass.getText().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "H:" + h + "  pass::" + pass.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        try {
+            EmojiUtil.handlerEmojiText(account, account.getText().toString(), LoginActivity.this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //软件键盘 点击的事件回调
     //处理确定按钮
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_DONE){
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
             login();
             return true;
         }
         return false;
     }
-
 
 
     /**
