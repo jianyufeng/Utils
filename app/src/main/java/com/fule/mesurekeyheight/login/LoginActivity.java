@@ -130,6 +130,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //登录的逻辑
                 login();
                 break;
+            default:
+                break;
         }
     }
 
@@ -173,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
 
 
-    class PasswordReplace extends ReplacementTransformationMethod {
+     static class  PasswordReplace extends ReplacementTransformationMethod {
 
         String strWord = null;
 
