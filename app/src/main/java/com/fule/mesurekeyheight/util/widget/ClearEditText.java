@@ -3,6 +3,8 @@ package com.fule.mesurekeyheight.util.widget;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -18,7 +20,7 @@ import com.fule.mesurekeyheight.R;
  * 邮箱: jianyufeng@38.hn
  */
 
-public class ClearEditText extends EditText implements View.OnTouchListener, View.OnFocusChangeListener {
+public class ClearEditText extends AppCompatEditText implements View.OnTouchListener, View.OnFocusChangeListener {
 
     //EditText右侧的删除按钮
     private Drawable mClearDrawable;
