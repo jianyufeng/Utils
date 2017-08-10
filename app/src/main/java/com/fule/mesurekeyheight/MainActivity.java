@@ -1,26 +1,24 @@
 package com.fule.mesurekeyheight;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fule.mesurekeyheight.activityUtil.SoftKeyboardStateHelper;
 import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
 import com.fule.mesurekeyheight.util.KeyBordUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements SoftKeyboardStateHelper.SoftKeyboardStateListener {
     private LinearLayout p;
     private EditText ed;
     private ListView lv;
@@ -31,28 +29,16 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout small;
     private TextView small_show;
 
-    private int keyH = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(),0);
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-            setHeight(small, keyH);
-            small_show.setVisibility(View.VISIBLE);
-            super.handleMessage(msg);
-        }
-    };
-
-
-    private ViewTreeObserver.OnGlobalLayoutListener mLayoutChangeListener;
-    private boolean mIsSoftKeyboardShowing;
+    private int keyH;
+    private SoftKeyboardStateHelper keyBroadHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mIsSoftKeyboardShowing = false;
-        //注册布局变化监听
-        getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mLayoutChangeListener);
+        keyBroadHelp = new SoftKeyboardStateHelper(findViewById(R.id.contain_id));
+        keyBroadHelp.addSoftKeyboardStateListener(this);
+        keyH = (int) SPUtil.get(getApplicationContext(), ConfigSettings.SETTING_KEYBOARD_HEIGHT.getId(), 0);
         p = (LinearLayout) findViewById(R.id.contain_id);
         ed = (EditText) findViewById(R.id.edit);
         lv = (ListView) findViewById(R.id.lv);
@@ -66,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 KeyBordUtil.hideKeybroad(MainActivity.this);
-//                setHeight(small,0);
                 return false;
             }
         });
@@ -85,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     lv.setStackFromBottom(false);
                 }
                 lv.setStackFromBottom(true);
+
+                state = 0 ;
                 if (!isLock) {
                     lockContentHeight();
                 }
@@ -96,13 +83,11 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.d(TAG, "onClick: " + KeyBordUtil.keyBoardShow(MainActivity.this, ed));
                 if (lv.isStackFromBottom()) {
                     lv.setStackFromBottom(false);
                 }
                 lv.setStackFromBottom(true);
-
+                state = 1;
                 if (!isLock) {
                     lockContentHeight();
                 }
@@ -114,27 +99,75 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 lv.smoothScrollToPosition(lv.getAdapter().getCount());
-//                ed.setFocusable(false);
+                state = 2 ;
+
                 KeyBordUtil.toggleKeyBroad(MainActivity.this);
+
             }
         });
+
     }
 
+    @Override
+    protected void onDestroy() {
+        keyBroadHelp.onDestroy();
+        super.onDestroy();
+
+    }
+
+
+
     private boolean isLock = false;
+
+    private int state  = 0;  // 当前点击那个   0 点击输入框  1 点击表情   2 点击加好
+    private int keyState = 1 ; //键盘状态  0 显示  1 隐藏
 
     /**
      * 锁定内容高度，防止跳闪
      */
-    private void lockContentHeight() {
+    private synchronized void lockContentHeight() {
         ViewGroup.LayoutParams params = p.getLayoutParams();
         params.height = p.getHeight() - keyH;
         p.setLayoutParams(params);
         isLock = true;
     }
+    /**
+     * 释放内容高度，防止跳闪
+     */
+    private synchronized void  releaseContentHeight() {
+        ViewGroup.LayoutParams params = p.getLayoutParams();
+        params.height = p.getHeight() + keyH;
+        p.setLayoutParams(params);
+        isLock = false;
+    }
+
 
     private void setHeight(View v, int px) {
         ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
         layoutParams.height = px;
         v.setLayoutParams(layoutParams);
+    }
+
+
+
+
+
+
+
+
+
+    @Override
+    public void onSoftKeyboardOpened(int keyboardHeightInPx) {
+        if (!isLock) {
+            lockContentHeight();
+        }
+    }
+
+    @Override
+    public void onSoftKeyboardClosed() {
+        if (state == 0){
+            releaseContentHeight();
+        }
+
     }
 }

@@ -112,7 +112,4 @@ public class ClearEditText extends AppCompatEditText implements View.OnTouchList
         doClearDrawable();
     }
 
-
-
-
 }

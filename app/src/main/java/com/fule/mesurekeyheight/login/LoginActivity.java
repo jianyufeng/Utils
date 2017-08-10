@@ -73,7 +73,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (isKeyboardShowing) {
                         //键盘高度  =  剩余高度   -  状态栏高度   -  虚拟按键的高度(不一定有  大部分 手机没有)
                         int keyH = heightDifference - ScreenUtil.getStatusBarHeight_1(getApplicationContext()) - ScreenUtil.getNavigationBarHeight(getApplicationContext());
-                        ;
                         if (keyH > keyHeight) {
                             //存储最高的键盘高度
                             keyHeight = keyH;
