@@ -16,6 +16,12 @@ import com.fule.mesurekeyheight.config.ConfigSettings;
 import com.fule.mesurekeyheight.config.SPUtil;
 import com.fule.mesurekeyheight.util.KeyBordUtil;
 import com.fule.mesurekeyheight.util.ScreenUtil;
+import com.scwang.smartrefresh.header.DeliveryHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 
 public class MainActivity extends AppCompatActivity implements SoftKeyboardStateHelper.SoftKeyboardStateListener {
@@ -71,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements SoftKeyboardState
                 }
                 lv.setStackFromBottom(true);
 
-                state = 0 ;
+                state = 0;
                 if (!isLock) {
                     lockContentHeight();
                 }
@@ -99,10 +105,30 @@ public class MainActivity extends AppCompatActivity implements SoftKeyboardState
             @Override
             public void onClick(View v) {
                 lv.smoothScrollToPosition(lv.getAdapter().getCount());
-                state = 2 ;
+                state = 2;
 
                 KeyBordUtil.toggleKeyBroad(MainActivity.this);
 
+            }
+        });
+
+
+        final RefreshLayout refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout);
+        //设置 Header 为 Material风格
+        refreshLayout.setRefreshHeader(new DeliveryHeader(this));
+        //设置 Footer 为 球脉冲
+        refreshLayout.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000);
+            }
+        });
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore(2000);
             }
         });
 
@@ -116,11 +142,10 @@ public class MainActivity extends AppCompatActivity implements SoftKeyboardState
     }
 
 
-
     private boolean isLock = false;
 
-    private int state  = 0;  // 当前点击那个   0 点击输入框  1 点击表情   2 点击加好
-    private int keyState = 1 ; //键盘状态  0 显示  1 隐藏
+    private int state = 0;  // 当前点击那个   0 点击输入框  1 点击表情   2 点击加好
+    private int keyState = 1; //键盘状态  0 显示  1 隐藏
 
     /**
      * 锁定内容高度，防止跳闪
@@ -131,10 +156,11 @@ public class MainActivity extends AppCompatActivity implements SoftKeyboardState
         p.setLayoutParams(params);
         isLock = true;
     }
+
     /**
      * 释放内容高度，防止跳闪
      */
-    private synchronized void  releaseContentHeight() {
+    private synchronized void releaseContentHeight() {
         ViewGroup.LayoutParams params = p.getLayoutParams();
         params.height = p.getHeight() + keyH;
         p.setLayoutParams(params);
@@ -149,13 +175,6 @@ public class MainActivity extends AppCompatActivity implements SoftKeyboardState
     }
 
 
-
-
-
-
-
-
-
     @Override
     public void onSoftKeyboardOpened(int keyboardHeightInPx) {
         if (!isLock) {
@@ -165,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements SoftKeyboardState
 
     @Override
     public void onSoftKeyboardClosed() {
-        if (state == 0){
+        if (state == 0) {
             releaseContentHeight();
         }
 
