@@ -13,8 +13,13 @@ import com.fule.mesurekeyheight.util.ScreenUtil;
 
 import java.util.ArrayList;
 
+/**
+ * 初版：
+ *  1、获取软件盘高度
+ *  2、监听软件盘打开和关闭
+ */
 public class GetKeyHeight extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "GetKeyHeight";
 
     public interface OnSoftKeyboardStateChangedListener {
         public void OnSoftKeyboardStateChanged(boolean isKeyBoardShow, int keyboardHeight);

@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/10.
+ *  二版： 使用工具类集成的方法   使用： SoftMainActivity 使用例子
+ *  1、获取软件盘高度
+ *  2、监听软件盘打开和关闭
  */
 
 public class SoftKeyboardStateHelper implements ViewTreeObserver.OnGlobalLayoutListener {

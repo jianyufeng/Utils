@@ -71,7 +71,7 @@ public enum ConfigSettings {
         ConfigSettings[] values = values();
         int cc = values.length;
         for (int i = 0; i < cc; i++) {
-            if (values[i].mId == id) {
+            if (values[i].mId.equals(id)) {
                 return values[i];
             }
         }

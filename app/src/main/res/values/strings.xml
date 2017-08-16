@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MesureKeyHeight</string>
+
+    <string name="title_style">风格</string>
+    <string name="title_using">使用</string>
+    <string name="title_practice">实战</string>
+    <string name="fragment_refresh_practive">实战</string>
 </resources>
