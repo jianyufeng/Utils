@@ -5,4 +5,6 @@
     <string name="title_using">使用</string>
     <string name="title_practice">实战</string>
     <string name="fragment_refresh_practive">实战</string>
+
+    <string name="title_activity_practice_repast">餐饮美食</string>
 </resources>

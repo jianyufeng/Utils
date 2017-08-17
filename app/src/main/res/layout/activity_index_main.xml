@@ -9,9 +9,9 @@
 
     <android.support.v7.widget.Toolbar
         style="@style/AppTheme.Toolbar"
+        android:visibility="visible"
         app:title="refresh"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <FrameLayout
         android:id="@+id/content"
