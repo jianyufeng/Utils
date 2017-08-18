@@ -3,17 +3,18 @@ package com.fule.mesurekeyheight.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.adapter.BaseRecyclerAdapter;
 import com.fule.mesurekeyheight.adapter.SmartViewHolder;
 import com.fule.mesurekeyheight.util.StatusBarUtil;
+import com.fule.mesurekeyheight.util.ToastUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
@@ -57,8 +58,8 @@ public class RepastPracticeActivity  extends AppCompatActivity{
         View view = findViewById(R.id.recyclerView);
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+//            recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(mAdapter = new BaseRecyclerAdapter<Model>(loadModels(),R.layout.listitem_practive_repast) {
                 @Override
                 protected void onBindViewHolder(SmartViewHolder holder, Model model, int position) {
@@ -89,7 +90,7 @@ public class RepastPracticeActivity  extends AppCompatActivity{
                     @Override
                     public void run() {
                         mAdapter.loadmore(loadModels());
-                        refreshlayout.finishLoadmore(false);  //
+                        refreshlayout.finishLoadmore(true);  //
                         if (mAdapter.getCount() > 12) {
                             Toast.makeText(getBaseContext(), "数据全部加载完毕", Toast.LENGTH_SHORT).show();
                             refreshlayout.setLoadmoreFinished(true);//设置之后，将不会再触发加载事件
@@ -98,7 +99,13 @@ public class RepastPracticeActivity  extends AppCompatActivity{
                 }, 1000);
             }
         });
-
+        mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Model item = (Model) mAdapter.getItem(position);
+                ToastUtil.showMessage(item.name);
+            }
+        });
         //状态栏透明和间距处理
         StatusBarUtil.darkMode(this);
         StatusBarUtil.setPaddingSmart(this, view);

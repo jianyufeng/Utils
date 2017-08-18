@@ -12,7 +12,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.fule.mesurekeyheight.R;
+import com.fule.mesurekeyheight.activity.ProfilePracticeActivity;
 import com.fule.mesurekeyheight.activity.RepastPracticeActivity;
+import com.fule.mesurekeyheight.activity.WebviewPracticeActivity;
+import com.fule.mesurekeyheight.activity.WeiboPracticeActivity;
 import com.fule.mesurekeyheight.util.StatusBarUtil;
 
 /**
@@ -35,7 +38,22 @@ public class RefreshPractiveFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(getContext(),RepastPracticeActivity.class));
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(getContext(), RepastPracticeActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(getContext(), ProfilePracticeActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getContext(), WebviewPracticeActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(getContext(), WeiboPracticeActivity.class));
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     }

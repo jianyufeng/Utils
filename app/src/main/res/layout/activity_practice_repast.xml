@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srlDragRate="0.7"
+        app:srlReboundDuration="500"
         app:srlHeaderMaxDragRate="1.3"
+        app:srlEnableLoadmoreWhenContentNotFull="true"
         app:srlHeaderHeight="150dp"
         app:srlEnableAutoLoadmore="true"
         app:srlEnablePreviewInEditMode="true">

@@ -30,6 +30,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.RepastPracticeActivity"/>
+        <activity android:name=".activity.ProfilePracticeActivity"/>
+        <activity android:name=".activity.WebviewPracticeActivity"/>
+        <activity android:name=".activity.WeiboPracticeActivity"/>
     </application>
 
 </manifest>
