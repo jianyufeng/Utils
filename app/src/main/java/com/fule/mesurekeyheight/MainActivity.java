@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.fule.mesurekeyheight.fragment.RefreshPractiveFragment;
 import com.fule.mesurekeyheight.util.StatusBarUtil;
@@ -20,8 +19,6 @@ import com.fule.mesurekeyheight.util.StatusBarUtil;
  * 测试刷新框架
  */
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-    private ListView lv;
     private static final String TAG = "MainActivity";
 
     private enum TabFragment {
@@ -72,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_index_main);
         //design包下的 底部导航栏   BottomNavigationView;
         final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         navigation.setOnNavigationItemSelectedListener(this); //监听
         navigation.setSelectedItemId(R.id.navigation_style); //默认选中项
         //状态栏透明和间距处理

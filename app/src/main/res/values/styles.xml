@@ -39,6 +39,10 @@
         <item name="android:textSize">@dimen/textsize_content</item>
         <item name="android:textColor">@color/colorTextContent</item>
     </style>
+    <style name="AppTheme.Label.Assistant">
+        <item name="android:textColor">@color/colorTextAssistant</item>
+        <item name="android:textSize">@dimen/textsize_content</item>
+    </style>
 
     <style name="AppTheme.Label.Layout">
         <item name="android:paddingTop">@dimen/padding_common_v</item>

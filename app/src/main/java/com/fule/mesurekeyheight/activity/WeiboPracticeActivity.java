@@ -28,7 +28,7 @@ public class WeiboPracticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_weibo);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);   //导航
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,13 +41,14 @@ public class WeiboPracticeActivity extends AppCompatActivity {
 
 
 
-        final View parallax = findViewById(R.id.parallax);
-        final View buttonBar = findViewById(R.id.buttonBarLayout);
-        final NestedScrollView scrollView = (NestedScrollView)findViewById(R.id.scrollView);
+        final View parallax = findViewById(R.id.parallax); // 图
+        final View buttonBar = findViewById(R.id.buttonBarLayout);  //导航中的控件
+
         final RefreshLayout refreshLayout = (RefreshLayout)findViewById(R.id.refreshLayout);
         refreshLayout.setOnMultiPurposeListener(new SimpleMultiPurposeListener() {
             @Override
             public void onHeaderPulling(RefreshHeader header, float percent, int offset, int headerHeight, int extendHeight) {
+                //下来刷新时处理的状态
                 mOffset = offset / 2;
                 parallax.setTranslationY(mOffset - mScrollY); //背景图 也缓慢向下拉动
                 toolbar.setAlpha(1 - Math.min(percent, 1));  //拉动时  慢慢隐藏toolbar
@@ -55,20 +56,23 @@ public class WeiboPracticeActivity extends AppCompatActivity {
 
             @Override
             public void onHeaderReleasing(RefreshHeader header, float percent, int offset, int footerHeight, int extendHeight) {
+                //释放刷新时处理的状态
                 mOffset = offset / 2;
                 parallax.setTranslationY(mOffset - mScrollY);
                 toolbar.setAlpha(1 - Math.min(percent, 1));
             }
 
         });
+        refreshLayout.autoRefresh();
 
-
+        final NestedScrollView scrollView = (NestedScrollView)findViewById(R.id.scrollView);
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             private int lastScrollY = 0;
             private int h = DensityUtil.dp2px(170);
             private int color = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)&0x00ffffff;
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                //内容滑动时的状态处理
                 if (lastScrollY < h) {
                     scrollY = Math.min(h, scrollY);
                     mScrollY = scrollY > h ? h : scrollY;

@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        style="@style/AppTheme.Toolbar"
-        android:visibility="visible"
-        app:title="refresh"
-        tools:visibility="visible" />
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--style="@style/AppTheme.Toolbar"-->
+        <!--android:visibility="visible"-->
+        <!--app:title="refresh"-->
+        <!--tools:visibility="visible" />-->
 
     <FrameLayout
         android:id="@+id/content"

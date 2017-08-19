@@ -9,4 +9,9 @@
     <string name="title_activity_practice_repast">餐饮美食</string>
     <string name="title_activity_practice_profile">个人中心</string>
     <string name="title_activity_practice_webview">Github</string>
+    <string name="title_activity_practice_feedlist">微博列表</string>
+    <string name="title_activity_practice_banner">滚动广告</string>
+    <string name="github_qqbrowser_kernel">网页由 github.com 提供\n已启用QQ浏览器X5内核</string>
+
+    <string name="title_activity_style_delivery">气球快递</string>
 </resources>

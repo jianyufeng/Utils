@@ -33,6 +33,12 @@
         <activity android:name=".activity.ProfilePracticeActivity"/>
         <activity android:name=".activity.WebviewPracticeActivity"/>
         <activity android:name=".activity.WeiboPracticeActivity"/>
+        <activity android:name=".activity.FeedlistPracticeActivity"/>
+        <activity android:name=".activity.BannerPracticeActivity"/>
+        <activity android:name=".activity.QQBrowserPracticeActivity"/>
+
+
+        <activity android:name=".style.DeliveryStyleActivity"/>
     </application>
 
 </manifest>

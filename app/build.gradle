@@ -50,4 +50,12 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
     //TextView的圆角  容器控件的圆角
     compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+    //gson json解析
+    compile 'com.google.code.gson:gson:2.8.1'
+    //glide 图片加载
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    compile 'com.android.support:support-v4:25.3.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    // 轮播头部
+    compile 'com.youth.banner:banner:1.4.9'  //最新版本
 }
