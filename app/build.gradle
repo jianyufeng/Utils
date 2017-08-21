@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.fule.mesurekeyheight"
         renderscriptTargetApi 19
@@ -33,7 +33,6 @@ dependencies {
     //内存泄露
     //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
     //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
-    compile 'com.android.support:appcompat-v7:25.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
@@ -54,8 +53,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     //glide 图片加载
     compile 'com.github.bumptech.glide:glide:4.0.0'
-    compile 'com.android.support:support-v4:25.3.1'
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
     // 轮播头部
     compile 'com.youth.banner:banner:1.4.9'  //最新版本
+    //RecycleView的添加动画
+    compile 'jp.wasabeef:recyclerview-animators:2.2.6'
 }

@@ -22,6 +22,8 @@ import com.fule.mesurekeyheight.activity.RepastPracticeActivity;
 import com.fule.mesurekeyheight.activity.WebviewPracticeActivity;
 import com.fule.mesurekeyheight.activity.WeiboPracticeActivity;
 import com.fule.mesurekeyheight.style.DeliveryStyleActivity;
+import com.fule.mesurekeyheight.style.DropboxStyleActivity;
+import com.fule.mesurekeyheight.style.FlyRefreshStyleActivity;
 import com.fule.mesurekeyheight.util.StatusBarUtil;
 
 /**
@@ -68,6 +70,12 @@ public class RefreshPractiveFragment extends Fragment {
                         break;
                     case 7:
                         startActivity(new Intent(getContext(), DeliveryStyleActivity.class));
+                        break;
+                    case 8:
+                        startActivity(new Intent(getContext(), DropboxStyleActivity.class));
+                        break;
+                    case 9:
+                        startActivity(new Intent(getContext(), FlyRefreshStyleActivity.class));
                         break;
                     default:
                         break;

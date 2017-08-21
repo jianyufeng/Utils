@@ -116,4 +116,5 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

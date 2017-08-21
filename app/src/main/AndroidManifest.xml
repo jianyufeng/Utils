@@ -39,6 +39,8 @@
 
 
         <activity android:name=".style.DeliveryStyleActivity"/>
+        <activity android:name=".style.DropboxStyleActivity"/>
+        <activity android:name=".style.FlyRefreshStyleActivity"/>
     </application>
 
 </manifest>

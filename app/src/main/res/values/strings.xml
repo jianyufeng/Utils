@@ -14,4 +14,7 @@
     <string name="github_qqbrowser_kernel">网页由 github.com 提供\n已启用QQ浏览器X5内核</string>
 
     <string name="title_activity_style_delivery">气球快递</string>
+    <string name="title_activity_style_dropbox">掉落盒子</string>
+    <string name="title_activity_style_flyrefresh">纸飞机</string>
+    <string name="title_activity_fly_refresh">FlyRefresh</string>
 </resources>
