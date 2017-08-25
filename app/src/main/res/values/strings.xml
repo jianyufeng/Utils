@@ -17,4 +17,9 @@
     <string name="title_activity_style_dropbox">掉落盒子</string>
     <string name="title_activity_style_flyrefresh">纸飞机</string>
     <string name="title_activity_fly_refresh">FlyRefresh</string>
+    <string name="title_activity_style_wave_swip">全屏水波</string>
+    <string name="title_activity_style_water_drop">苹果水滴</string>
+    <string name="title_activity_style_material">官方主题</string>
+    <string name="title_activity_style_phoenix">金色校园</string>
+    <string name="title_activity_style_circle">弹出圆圈</string>
 </resources>
