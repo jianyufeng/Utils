@@ -41,6 +41,17 @@
         <activity android:name=".style.DeliveryStyleActivity"/>
         <activity android:name=".style.DropboxStyleActivity"/>
         <activity android:name=".style.FlyRefreshStyleActivity"/>
+        <activity android:name=".style.WaveSwipStyleActivity"/>
+        <activity android:name=".style.WaterDropStyleActivity"/>
+        <activity android:name=".style.MaterialStyleActivity"/>
+        <activity android:name=".style.PhoenixStyleActivity"/>
+        <activity android:name=".style.TaurusStyleActivity"/>
+        <activity android:name=".style.BezierStyleActivity"/>
+        <activity android:name=".style.CircleStyleActivity"/>
+        <activity android:name=".style.FunGameHitBlockStyleActivity"/>
+        <activity android:name=".style.FunGameBattleCityStyleActivity"/>
+        <activity android:name=".style.StoreHouseStyleActivity"/>
+        <activity android:name=".style.ClassicsStyleActivity"/>
     </application>
 
 </manifest>

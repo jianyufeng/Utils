@@ -21,9 +21,20 @@ import com.fule.mesurekeyheight.activity.QQBrowserPracticeActivity;
 import com.fule.mesurekeyheight.activity.RepastPracticeActivity;
 import com.fule.mesurekeyheight.activity.WebviewPracticeActivity;
 import com.fule.mesurekeyheight.activity.WeiboPracticeActivity;
+import com.fule.mesurekeyheight.style.BezierStyleActivity;
+import com.fule.mesurekeyheight.style.CircleStyleActivity;
+import com.fule.mesurekeyheight.style.ClassicsStyleActivity;
 import com.fule.mesurekeyheight.style.DeliveryStyleActivity;
 import com.fule.mesurekeyheight.style.DropboxStyleActivity;
 import com.fule.mesurekeyheight.style.FlyRefreshStyleActivity;
+import com.fule.mesurekeyheight.style.FunGameBattleCityStyleActivity;
+import com.fule.mesurekeyheight.style.FunGameHitBlockStyleActivity;
+import com.fule.mesurekeyheight.style.MaterialStyleActivity;
+import com.fule.mesurekeyheight.style.PhoenixStyleActivity;
+import com.fule.mesurekeyheight.style.StoreHouseStyleActivity;
+import com.fule.mesurekeyheight.style.TaurusStyleActivity;
+import com.fule.mesurekeyheight.style.WaterDropStyleActivity;
+import com.fule.mesurekeyheight.style.WaveSwipStyleActivity;
 import com.fule.mesurekeyheight.util.StatusBarUtil;
 
 /**
@@ -41,7 +52,7 @@ public class RefreshPractiveFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         StatusBarUtil.setPaddingSmart(getContext(), view.findViewById(R.id.toolbar));
-        ((AppCompatActivity)getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
+        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.toolbar));
         ListView lv = (ListView) view.findViewById(R.id.recyclerView);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +88,40 @@ public class RefreshPractiveFragment extends Fragment {
                     case 9:
                         startActivity(new Intent(getContext(), FlyRefreshStyleActivity.class));
                         break;
+                    case 10:
+                        startActivity(new Intent(getContext(), WaveSwipStyleActivity.class));
+                        break;
+                    case 11:
+                        startActivity(new Intent(getContext(), WaterDropStyleActivity.class));
+                        break;
+                    case 12:
+                        startActivity(new Intent(getContext(), MaterialStyleActivity.class));
+                        break;
+                    case 13:
+                        startActivity(new Intent(getContext(), PhoenixStyleActivity.class));
+                        break;
+                    case 14:
+                        startActivity(new Intent(getContext(), TaurusStyleActivity.class));
+                        break;
+                    case 15:
+                        startActivity(new Intent(getContext(), BezierStyleActivity.class));
+                        break;
+                    case 16:
+                        startActivity(new Intent(getContext(), CircleStyleActivity.class));
+                        break;
+                    case 17:
+                        startActivity(new Intent(getContext(), FunGameHitBlockStyleActivity.class));
+                        break;
+                    case 18:
+                        startActivity(new Intent(getContext(), FunGameBattleCityStyleActivity.class));
+                        break;
+                    case 19:
+                        startActivity(new Intent(getContext(), StoreHouseStyleActivity.class));
+                        break;
+                    case 20:
+                        startActivity(new Intent(getContext(), ClassicsStyleActivity.class));
+                        break;
+
                     default:
                         break;
                 }
