@@ -29,34 +29,34 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RepastPracticeActivity"/>
-        <activity android:name=".activity.ProfilePracticeActivity"/>
-        <activity android:name=".activity.WebviewPracticeActivity"/>
-        <activity android:name=".activity.WeiboPracticeActivity"/>
-        <activity android:name=".activity.FeedlistPracticeActivity"/>
-        <activity android:name=".activity.BannerPracticeActivity"/>
-        <activity android:name=".activity.QQBrowserPracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.RepastPracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.ProfilePracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.WebviewPracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.WeiboPracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.FeedlistPracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.BannerPracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.QQBrowserPracticeActivity"/>
 
 
-        <activity android:name=".style.DeliveryStyleActivity"/>
-        <activity android:name=".style.DropboxStyleActivity"/>
-        <activity android:name=".style.FlyRefreshStyleActivity"/>
-        <activity android:name=".style.WaveSwipStyleActivity"/>
-        <activity android:name=".style.WaterDropStyleActivity"/>
-        <activity android:name=".style.MaterialStyleActivity"/>
-        <activity android:name=".style.PhoenixStyleActivity"/>
-        <activity android:name=".style.TaurusStyleActivity"/>
-        <activity android:name=".style.BezierStyleActivity"/>
-        <activity android:name=".style.CircleStyleActivity"/>
-        <activity android:name=".style.FunGameHitBlockStyleActivity"/>
-        <activity android:name=".style.FunGameBattleCityStyleActivity"/>
-        <activity android:name=".style.StoreHouseStyleActivity"/>
-        <activity android:name=".style.ClassicsStyleActivity"/>
-        <activity android:name=".using.BasicUsingActivity"/>
-        <activity android:name=".using.AssignDefaultUsingActivity"/>
-        <activity android:name=".using.AssignXmlUsingActivity"/>
-        <activity android:name=".using.AssignCodeUsingActivity"/>
-        <activity android:name=".using.SnapHelperUsingActivity"/>
+        <activity android:name=".refreshFrame.style.DeliveryStyleActivity"/>
+        <activity android:name=".refreshFrame.style.DropboxStyleActivity"/>
+        <activity android:name=".refreshFrame.style.FlyRefreshStyleActivity"/>
+        <activity android:name=".refreshFrame.style.WaveSwipStyleActivity"/>
+        <activity android:name=".refreshFrame.style.WaterDropStyleActivity"/>
+        <activity android:name=".refreshFrame.style.MaterialStyleActivity"/>
+        <activity android:name=".refreshFrame.style.PhoenixStyleActivity"/>
+        <activity android:name=".refreshFrame.style.TaurusStyleActivity"/>
+        <activity android:name=".refreshFrame.style.BezierStyleActivity"/>
+        <activity android:name=".refreshFrame.style.CircleStyleActivity"/>
+        <activity android:name=".refreshFrame.style.FunGameHitBlockStyleActivity"/>
+        <activity android:name=".refreshFrame.style.FunGameBattleCityStyleActivity"/>
+        <activity android:name=".refreshFrame.style.StoreHouseStyleActivity"/>
+        <activity android:name=".refreshFrame.style.ClassicsStyleActivity"/>
+        <activity android:name=".refreshFrame.using.BasicUsingActivity"/>
+        <activity android:name=".refreshFrame.using.AssignDefaultUsingActivity"/>
+        <activity android:name=".refreshFrame.using.AssignXmlUsingActivity"/>
+        <activity android:name=".refreshFrame.using.AssignCodeUsingActivity"/>
+        <activity android:name=".refreshFrame.using.SnapHelperUsingActivity"/>
 
         <!--<receiver android:name=".broadcast.NetWorkStateReceiver">-->
             <!--<intent-filter>-->

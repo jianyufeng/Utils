@@ -1,4 +1,4 @@
-package com.fule.mesurekeyheight;
+package com.fule.mesurekeyheight.refreshFrame;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.fule.mesurekeyheight.R;
 import com.fule.mesurekeyheight.refreshFrame.fragment.RefreshPractiveFragment;
 import com.fule.mesurekeyheight.util.StatusBarUtil;
 
