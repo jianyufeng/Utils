@@ -35,6 +35,14 @@ import com.fule.mesurekeyheight.style.StoreHouseStyleActivity;
 import com.fule.mesurekeyheight.style.TaurusStyleActivity;
 import com.fule.mesurekeyheight.style.WaterDropStyleActivity;
 import com.fule.mesurekeyheight.style.WaveSwipStyleActivity;
+import com.fule.mesurekeyheight.using.AssignCodeUsingActivity;
+import com.fule.mesurekeyheight.using.AssignDefaultUsingActivity;
+import com.fule.mesurekeyheight.using.AssignXmlUsingActivity;
+import com.fule.mesurekeyheight.using.BasicUsingActivity;
+import com.fule.mesurekeyheight.using.CustomUsingActivity;
+import com.fule.mesurekeyheight.using.ListenerUsingActivity;
+import com.fule.mesurekeyheight.using.NestLayoutUsingActivity;
+import com.fule.mesurekeyheight.using.SnapHelperUsingActivity;
 import com.fule.mesurekeyheight.util.StatusBarUtil;
 
 /**
@@ -120,6 +128,30 @@ public class RefreshPractiveFragment extends Fragment {
                         break;
                     case 20:
                         startActivity(new Intent(getContext(), ClassicsStyleActivity.class));
+                        break;
+                    case 21:
+                        startActivity(new Intent(getContext(), BasicUsingActivity.class));
+                        break;
+                    case 22:
+                        startActivity(new Intent(getContext(), AssignDefaultUsingActivity.class));
+                        break;
+                    case 23:
+                        startActivity(new Intent(getContext(), AssignXmlUsingActivity.class));
+                        break;
+                    case 24:
+                        startActivity(new Intent(getContext(), AssignCodeUsingActivity.class));
+                        break;
+                    case 25:
+                        startActivity(new Intent(getContext(), ListenerUsingActivity.class));
+                        break;
+                    case 26:
+                        startActivity(new Intent(getContext(), NestLayoutUsingActivity.class));
+                        break;
+                    case 27:
+                        startActivity(new Intent(getContext(), CustomUsingActivity.class));
+                        break;
+                    case 28:
+                        startActivity(new Intent(getContext(), SnapHelperUsingActivity.class));
                         break;
 
                     default:

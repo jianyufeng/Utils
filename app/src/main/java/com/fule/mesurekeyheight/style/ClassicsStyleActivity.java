@@ -175,7 +175,12 @@ public class ClassicsStyleActivity extends AppCompatActivity implements AdapterV
         } else if (mDrawableProgress instanceof VectorDrawableCompat) {
             ((VectorDrawableCompat) mDrawableProgress).setTint(0xffffffff);
         }
+
+
     }
+
+
+
 
 
 }

@@ -25,6 +25,7 @@ import java.util.Arrays;
 
 import static android.R.layout.simple_list_item_2;
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
+import static com.fule.mesurekeyheight.R.id.refreshLayout;
 
 public class TaurusStyleActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -63,7 +64,7 @@ public class TaurusStyleActivity extends AppCompatActivity implements AdapterVie
             }
         });
 
-        mRefreshLayout = (RefreshLayout)findViewById(R.id.refreshLayout);
+        mRefreshLayout = (RefreshLayout)findViewById(refreshLayout);
         if (isFirstEnter) {
             isFirstEnter = false;
             mRefreshLayout.autoRefresh();//第一次进入触发自动刷新，演示效果
@@ -71,7 +72,7 @@ public class TaurusStyleActivity extends AppCompatActivity implements AdapterVie
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         mToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-
+        mRefreshLayout.setDisableContentWhenRefresh(true);//是否在刷新的时候禁止列表的操作
         View view = findViewById(R.id.recyclerView);
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;

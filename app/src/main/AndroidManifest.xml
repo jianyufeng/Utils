@@ -52,6 +52,20 @@
         <activity android:name=".style.FunGameBattleCityStyleActivity"/>
         <activity android:name=".style.StoreHouseStyleActivity"/>
         <activity android:name=".style.ClassicsStyleActivity"/>
+        <activity android:name=".using.BasicUsingActivity"/>
+        <activity android:name=".using.AssignDefaultUsingActivity"/>
+        <activity android:name=".using.AssignXmlUsingActivity"/>
+        <activity android:name=".using.AssignCodeUsingActivity"/>
+        <activity android:name=".using.SnapHelperUsingActivity"/>
+
+        <!--<receiver android:name=".broadcast.NetWorkStateReceiver">-->
+            <!--<intent-filter>-->
+                <!--//检测网络变化的acton-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
     </application>
 
 </manifest>
