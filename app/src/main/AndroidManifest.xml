@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.fule.mesurekeyheight"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fule.mesurekeyheight">
     <!-- 读取SD卡权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 网络状态权限 -->
@@ -11,59 +11,66 @@
     <!-- 设备编号权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".App"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity"
-                  android:windowSoftInputMode="adjustResize">
+        <activity
+            android:name=".login.LoginActivity"
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
-        <activity android:name=".MainActivity"
-                  android:windowSoftInputMode="adjustResize">
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".refreshFrame.activity.RepastPracticeActivity"/>
-        <activity android:name=".refreshFrame.activity.ProfilePracticeActivity"/>
-        <activity android:name=".refreshFrame.activity.WebviewPracticeActivity"/>
-        <activity android:name=".refreshFrame.activity.WeiboPracticeActivity"/>
-        <activity android:name=".refreshFrame.activity.FeedlistPracticeActivity"/>
-        <activity android:name=".refreshFrame.activity.BannerPracticeActivity"/>
-        <activity android:name=".refreshFrame.activity.QQBrowserPracticeActivity"/>
+        <activity android:name=".refreshFrame.activity.RepastPracticeActivity" />
+        <activity android:name=".refreshFrame.activity.ProfilePracticeActivity" />
+        <activity android:name=".refreshFrame.activity.WebviewPracticeActivity" />
+        <activity android:name=".refreshFrame.activity.WeiboPracticeActivity" />
+        <activity android:name=".refreshFrame.activity.FeedlistPracticeActivity" />
+        <activity android:name=".refreshFrame.activity.BannerPracticeActivity" />
+        <activity android:name=".refreshFrame.activity.QQBrowserPracticeActivity" />
 
+        <!--user 风格-->
+        <activity android:name=".refreshFrame.style.DeliveryStyleActivity" />
+        <activity android:name=".refreshFrame.style.DropboxStyleActivity" />
+        <activity android:name=".refreshFrame.style.FlyRefreshStyleActivity" />
+        <activity android:name=".refreshFrame.style.WaveSwipStyleActivity" />
+        <activity android:name=".refreshFrame.style.WaterDropStyleActivity" />
+        <activity android:name=".refreshFrame.style.MaterialStyleActivity" />
+        <activity android:name=".refreshFrame.style.PhoenixStyleActivity" />
+        <activity android:name=".refreshFrame.style.TaurusStyleActivity" />
+        <activity android:name=".refreshFrame.style.BezierStyleActivity" />
+        <activity android:name=".refreshFrame.style.CircleStyleActivity" />
+        <activity android:name=".refreshFrame.style.FunGameHitBlockStyleActivity" />
+        <activity android:name=".refreshFrame.style.FunGameBattleCityStyleActivity" />
+        <activity android:name=".refreshFrame.style.StoreHouseStyleActivity" />
+        <activity android:name=".refreshFrame.style.ClassicsStyleActivity" />
+        <!--user 使用-->
 
-        <activity android:name=".refreshFrame.style.DeliveryStyleActivity"/>
-        <activity android:name=".refreshFrame.style.DropboxStyleActivity"/>
-        <activity android:name=".refreshFrame.style.FlyRefreshStyleActivity"/>
-        <activity android:name=".refreshFrame.style.WaveSwipStyleActivity"/>
-        <activity android:name=".refreshFrame.style.WaterDropStyleActivity"/>
-        <activity android:name=".refreshFrame.style.MaterialStyleActivity"/>
-        <activity android:name=".refreshFrame.style.PhoenixStyleActivity"/>
-        <activity android:name=".refreshFrame.style.TaurusStyleActivity"/>
-        <activity android:name=".refreshFrame.style.BezierStyleActivity"/>
-        <activity android:name=".refreshFrame.style.CircleStyleActivity"/>
-        <activity android:name=".refreshFrame.style.FunGameHitBlockStyleActivity"/>
-        <activity android:name=".refreshFrame.style.FunGameBattleCityStyleActivity"/>
-        <activity android:name=".refreshFrame.style.StoreHouseStyleActivity"/>
-        <activity android:name=".refreshFrame.style.ClassicsStyleActivity"/>
-        <activity android:name=".refreshFrame.using.BasicUsingActivity"/>
-        <activity android:name=".refreshFrame.using.AssignDefaultUsingActivity"/>
-        <activity android:name=".refreshFrame.using.AssignXmlUsingActivity"/>
-        <activity android:name=".refreshFrame.using.AssignCodeUsingActivity"/>
-        <activity android:name=".refreshFrame.using.SnapHelperUsingActivity"/>
+        <activity android:name=".refreshFrame.using.BasicUsingActivity" />
+        <activity android:name=".refreshFrame.using.AssignDefaultUsingActivity" />
+        <activity android:name=".refreshFrame.using.AssignXmlUsingActivity" />
+        <activity android:name=".refreshFrame.using.AssignCodeUsingActivity" />
+        <activity android:name=".refreshFrame.using.ListenerUsingActivity" />
+        <activity android:name=".refreshFrame.using.CustomUsingActivity" />
+        <activity android:name=".refreshFrame.using.NestLayoutUsingActivity" />
+        <activity android:name=".refreshFrame.using.SnapHelperUsingActivity" />
 
         <!--<receiver android:name=".broadcast.NetWorkStateReceiver">-->
-            <!--<intent-filter>-->
-                <!--//检测网络变化的acton-->
-                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
+        <!--<intent-filter>-->
+        <!--//检测网络变化的acton-->
+        <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
+        <!--<category android:name="android.intent.category.DEFAULT" />-->
+        <!--</intent-filter>-->
         <!--</receiver>-->
 
     </application>

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="create_group_type_code">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
-        <item>21</item>
-        <item>22</item>
-        <item>23</item>
-        <item>24</item>
-        <item>25</item>
-        <item>26</item>
-        <item>27</item>
-        <item>28</item>
-        <item>29</item>
+    <string-array name="refresh_type">
+        <item>Repast餐饮美食</item>
+        <item>Profile个人中心</item>
+        <item>webView</item>
+        <item>WeiBo微博主页</item>
+        <item>FeedList微博列表</item>
+        <item>Banner滚动广告</item>
+        <item>QQBrowser QQ浏览器</item>
+        <item>Delivery 气球快递</item>
+        <item>Dropbox 掉落盒子</item>
+        <item>FlyRefresh 纸飞机</item>
+        <item>WaveSwipe 全屏水波</item>
+        <item>WaterDrop 苹果水滴</item>
+        <item>Material 官方主题</item>
+        <item>Phoenix 金色校园</item>
+        <item>Taurus 冲上云霄</item>
+        <item>Bezier 贝塞尔雷达</item>
+        <item>Circle 弹出圆圈</item>
+        <item>FunGameHitBlock 打砖块</item>
+        <item>FunGameBattleCity 战争城市</item>
+        <item>StoreHouse</item>
+        <item>Classics 经典风格</item>
+        <item>Basic 基本使用</item>
+        <item>DefaultCreater 设置全局默认的Header 和 Footer</item>
+        <item>XmlDefine 在xml中指定Header和Footer</item>
+        <item>CodeDefine 代码中指定Header和Footer</item>
+        <item>Listener 多功能监听</item>
+        <item>NestLayout嵌套Layout作为内容</item>
+        <item>Custom 自定义Header</item>
+        <item>SnapHelper 结合SnapHelper使用</item>
         <item>30</item>
         <item>31</item>
     </string-array>
