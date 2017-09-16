@@ -89,4 +89,20 @@
     <string name="title_activity_using_overscroll">越界回弹</string>
     <string name="title_activity_using_custom">自定义Header</string>
     <string name="title_activity_using_snaphelper">SnapHelper</string>
+
+
+
+    <string name="record_start">开始录制</string>
+    <string name="record_stop">停止录制</string>
+
+    <string name="image_filter">图片处理</string>
+    <string name="video_record">视频录制</string>
+
+    <string name="filter_normal">普通</string>
+    <string name="filter_blend">叠加</string>
+    <string name="filter_soft_light">柔和叠加</string>
+    <string name="filter_stack_blur">模糊</string>
+    <string name="filter_tone_curve">色调曲线</string>
+
+
 </resources>

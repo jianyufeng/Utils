@@ -88,9 +88,7 @@ public class CameraInterface {
         }
         mParams.setPreviewSize(mWidth, mHeight);
         mCamera.setParameters(mParams);
-        mCamera.setPreviewTexture(mSurface);
-        mCamera.startPreview();
-        mCamera.unlock();
+
     }
     public void switchCamera(boolean reset) throws IOException {
         if (!reset) {
@@ -208,5 +206,16 @@ public class CameraInterface {
 
     public void doStopCamera(Context c) {
         freeCameraResource();
+    }
+
+    public void doStartPreview(SurfaceTexture mSurface, float v) {
+
+        try {
+            mCamera.setPreviewTexture(mSurface);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mCamera.startPreview();
+        mCamera.unlock();
     }
 }
