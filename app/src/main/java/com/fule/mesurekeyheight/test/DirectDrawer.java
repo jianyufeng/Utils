@@ -9,28 +9,24 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-/**
- * Created by Administrator on 2017/9/15.
- */
-
 public class DirectDrawer {
     private final String vertexShaderCode =
             "attribute vec4 vPosition;" +
                     "attribute vec2 inputTextureCoordinate;" +
                     "varying vec2 textureCoordinate;" +
                     "void main()" +
-                    "{" +
-                    "gl_Position = vPosition;" +
+                    "{"+
+                    "gl_Position = vPosition;"+
                     "textureCoordinate = inputTextureCoordinate;" +
                     "}";
 
     private final String fragmentShaderCode =
-            "#extension GL_OES_EGL_image_external : require" +
+            "#extension GL_OES_EGL_image_external : require\n"+
                     "precision mediump float;" +
-                    "varying vec2 textureCoordinate;" +
-                    "uniform samplerExternalOES s_texture;" +
+                    "varying vec2 textureCoordinate;\n" +
+                    "uniform samplerExternalOES s_texture;\n" +
                     "void main() {" +
-                    "  gl_FragColor = texture2D( s_texture, textureCoordinate );" +
+                    "  gl_FragColor = texture2D( s_texture, textureCoordinate );\n" +
                     "}";
 
     private FloatBuffer vertexBuffer, textureVerticesBuffer;
@@ -39,7 +35,7 @@ public class DirectDrawer {
     private int mPositionHandle;
     private int mTextureCoordHandle;
 
-    private short drawOrder[] = {0, 1, 2, 0, 2, 3}; // order to draw vertices
+    private short drawOrder[] = { 0, 1, 2, 0, 2, 3 }; // order to draw vertices
 
     // number of coordinates per vertex in this array
     private static final int COORDS_PER_VERTEX = 2;
@@ -47,10 +43,10 @@ public class DirectDrawer {
     private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
 
     static float squareCoords[] = {
-            -1.0f, 1.0f,
+            -1.0f,  1.0f,
             -1.0f, -1.0f,
             1.0f, -1.0f,
-            1.0f, 1.0f,
+            1.0f,  1.0f,
     };
 
     static float textureVertices[] = {
@@ -59,6 +55,7 @@ public class DirectDrawer {
             1.0f, 0.0f,
             0.0f, 0.0f,
     };
+
     private int texture;
 
     public DirectDrawer(int texture)
@@ -84,6 +81,9 @@ public class DirectDrawer {
         textureVerticesBuffer.put(textureVertices);
         textureVerticesBuffer.position(0);
 
+
+
+
         int vertexShader    = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode);
         int fragmentShader  = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
 
@@ -92,33 +92,8 @@ public class DirectDrawer {
         GLES20.glAttachShader(mProgram, fragmentShader); // add the fragment shader to program
         GLES20.glLinkProgram(mProgram);                  // creates OpenGL ES program executables
     }
-    private  int loadShader(int type, String shaderCode){
 
-        // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
-        // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
-        int shader = GLES20.glCreateShader(type);
-
-        // add the source code to the shader and compile it
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
-
-        return shader;
-    }
-    private float[] transformTextureCoordinates( float[] coords, float[] matrix)
-    {
-        float[] result = new float[ coords.length ];
-        float[] vt = new float[4];
-
-        for ( int i = 0 ; i < coords.length ; i += 2 ) {
-            float[] v = { coords[i], coords[i+1], 0 , 1  };
-            Matrix.multiplyMV(vt, 0, matrix, 0, v, 0);
-            result[i] = vt[0];
-            result[i+1] = vt[1];
-        }
-        return result;
-    }
-
-    public void draw(float[] mtx)
+    public void drawSelf(float[] mtx)
     {
         GLES20.glUseProgram(mProgram);
 
@@ -137,15 +112,38 @@ public class DirectDrawer {
         mTextureCoordHandle = GLES20.glGetAttribLocation(mProgram, "inputTextureCoordinate");
         GLES20.glEnableVertexAttribArray(mTextureCoordHandle);
 
-//        textureVerticesBuffer.clear();
-//        textureVerticesBuffer.put( transformTextureCoordinates( textureVertices, mtx ));
-//        textureVerticesBuffer.position(0);
         GLES20.glVertexAttribPointer(mTextureCoordHandle, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, textureVerticesBuffer);
-
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, drawOrder.length, GLES20.GL_UNSIGNED_SHORT, drawListBuffer);
 
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle);
         GLES20.glDisableVertexAttribArray(mTextureCoordHandle);
+    }
+
+    private  int loadShader(int type, String shaderCode){
+
+        // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
+        // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
+        int shader = GLES20.glCreateShader(type);
+
+        // add the source code to the shader and compile it
+        GLES20.glShaderSource(shader, shaderCode);
+        GLES20.glCompileShader(shader);
+
+        return shader;
+    }
+
+    private float[] transformTextureCoordinates( float[] coords, float[] matrix)
+    {
+        float[] result = new float[ coords.length ];
+        float[] vt = new float[4];
+
+        for ( int i = 0 ; i < coords.length ; i += 2 ) {
+            float[] v = { coords[i], coords[i+1], 0 , 1  };
+            Matrix.multiplyMV(vt, 0, matrix, 0, v, 0);
+            result[i] = vt[0];
+            result[i+1] = vt[1];
+        }
+        return result;
     }
 }

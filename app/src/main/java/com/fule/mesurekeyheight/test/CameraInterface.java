@@ -88,7 +88,7 @@ public class CameraInterface {
         }
         mParams.setPreviewSize(mWidth, mHeight);
         mCamera.setParameters(mParams);
-
+        doStartPreview(mSurface,0f);
     }
     public void switchCamera(boolean reset) throws IOException {
         if (!reset) {
