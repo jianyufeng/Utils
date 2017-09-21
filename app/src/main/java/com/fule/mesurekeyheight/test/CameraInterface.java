@@ -6,7 +6,6 @@ import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.view.Surface;
 
-
 import com.fule.mesurekeyheight.util.ScreenUtil;
 
 import java.io.IOException;
@@ -88,6 +87,7 @@ public class CameraInterface {
         }
         mParams.setPreviewSize(mWidth, mHeight);
         mCamera.setParameters(mParams);
+
         doStartPreview(mSurface,0f);
     }
     public void switchCamera(boolean reset) throws IOException {

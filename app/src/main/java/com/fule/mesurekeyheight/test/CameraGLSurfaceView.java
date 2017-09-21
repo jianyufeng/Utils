@@ -36,6 +36,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         setRenderMode(RENDERMODE_WHEN_DIRTY);
         //当有数据时才rendered或者主动调用了GLSurfaceView的requestRender.默认是连续模式，
         // 很显然Camera适合脏模式，一秒30帧，当有数据来时再渲染。
+
     }
 
 
